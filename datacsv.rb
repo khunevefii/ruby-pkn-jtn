@@ -32,23 +32,43 @@ puts avg = sum/score.size
 puts ""
 
 #3
+color = Array.new
+data.each{ |row| color << row[2]}
+color_count = {}
+color.each {|color|
+	#color = student[:color]
+	if color_count[color] == nil
+		color_count[color] = 0
+	end
+	color_count[color] += 1
+}
 puts "#3"
 puts "What is the most popular color among students?"
 print ">> "
-color = Array.new
-data.each { |row| color << row[2] }
-h = Hash.new(0)
-color.each{ |v| h[v]+=1}
-puts h.max_by{ |k,v| v}.first
-puts "Least popular?"
+max_number = color_count.values.max 
+color_count.each{ |k, v|
+	if max_number == v
+		print k + " "
+	end
+}
+puts ""
+
+puts"Least popular?"
 print ">> "
-puts h.min_by{ |k,v| v}.first
+min_number = color_count.values.min 
+color_count.each{ |k, v|
+	if min_number == v
+		print k + " "
+	end
+}
 puts ""
 
 #4
+puts ""
 puts "#4"
 puts "Capitalize the last letter of first name and last name, and lowercase the first letter of first name and last name."
 data.each do |row|
 	print ">> "
 	puts row[0].reverse.split(/\b/).map(&:capitalize).join.reverse
 end
+puts ""
